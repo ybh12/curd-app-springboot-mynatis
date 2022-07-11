@@ -1,0 +1,24 @@
+server:
+  port: 9000
+#数据库设置
+spring:
+  ##数据库连接信息
+  datasource:
+    url: jdbc:mysql://8.130.102.177:3306/pracite_service_app?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: Ehyaya2021
+  # 开启sql打印
+logging:
+  level:
+    com.travel.form.mapper: debug
+knife4j:
+  # 开启增强配置
+  enable: true
+  production: false
+  basic:
+    enable: true
+    # swagger认证用户名
+    username: admin
+    # swagger认证密码
+    password: 12345678
+

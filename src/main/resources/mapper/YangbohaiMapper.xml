@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.form.mapper.YangbohaiOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.travel.form.data.entity.YangbohaiOrderEntity">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="orderName" column="order_name" jdbcType="VARCHAR"/>
+        <result property="payment" column="payment" jdbcType="VARCHAR"/>
+        <result property="postFee" column="post_fee" jdbcType="VARCHAR"/>
+        <result property="paymentType" column="payment_type" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_name,payment,
+        post_fee,payment_type,status,
+        remark,del_flag,created_by,
+        created_time,updated_by,updated_time
+    </sql>
+
+    <!--使用訂單查詢-->
+    <select id="selectOrderByName" resultType="com.travel.form.data.entity.YangbohaiOrderEntity">
+        select * from t_order_yangbohai
+        <if test="name!=null">
+            where order_name=#{name}
+        </if>
+    </select>
+
+
+    <select id="selectOrderByType" resultType="com.travel.form.data.entity.YangbohaiOrderEntity">
+        select * from t_order_yangbohai where del_flag=0
+    </select>
+
+    <!--查詢全部-->
+    <select id="queryAllOrder" resultType="com.travel.form.data.entity.YangbohaiOrderEntity">
+    select * from t_order_yangbohai
+    </select>
+
+    <!--增加一个Order-->
+    <insert id="addOrder" parameterType="com.travel.form.data.entity.YangbohaiOrderEntity">
+        insert into st_order_yangbohai(order_name,post_fee,payment_type)
+        values (#{order.order_name}, #{order.post_fee}, #{order.payment_type})
+    </insert>
+
+    <!--根据id删除一个Order-->
+    <delete id="deleteOrderById" parameterType="com.travel.form.data.entity.YangbohaiOrderEntity">
+        delete from t_order_yangbohai where id=#{id}
+    </delete>
+
+    <!--更新Order-->
+<!--    <update id="updateOrder" parameterType="com.travel.form.data.entity.YangbohaiOrderEntity">-->
+<!--        update t_order_yangbohai.-->
+<!--        set id = #{id},order_name = #{order.order_name},payment = #{order.payment},post_fee = #{order.post_fee},-->
+<!--        payment_type = #{order.payment_type},status = #{order.status}-->
+<!--        where id = #{order.id}-->
+<!--    </update>-->
+</mapper>
